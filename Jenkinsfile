@@ -12,7 +12,7 @@ pipeline {
 		DOCKER-CRED = credentials('docker-credentials')
 			API_KEY = credentials('api-key')
 			TAG = sh(script: 'date +%s', returnStdout: true).trim()
-			IMAGE = inderharrysingh/ultimate:$TAG
+			IMAGE = "inderharrysingh/ultimate:$TAG"
 
 	}
 
@@ -55,7 +55,7 @@ pipeline {
 			steps {
 
 
-				docker build . -t $IMAGE --build-args=TMDB_V3_API_KEY=$API_KEY
+				sh 	"docker build . -t $IMAGE --build-args=TMDB_V3_API_KEY=$API_KEY"
 
 			}
 
@@ -66,7 +66,7 @@ pipeline {
 
 			steps {
 
-				trivy image $IMAGE
+				sh "trivy image $IMAGE"
 			}
 		}
 
@@ -83,7 +83,7 @@ pipeline {
 
 
 
-							docker push $IMAGE
+							sh "docker push $IMAGE"
 					}
 
 
@@ -96,22 +96,6 @@ pipeline {
 
 
 	}
-
-
-
-
-
-	post {
-
-		always {
-
-			docker rmi $IMAGE
-}
-
-}
-
-
-
 
 
 
