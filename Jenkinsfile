@@ -55,7 +55,7 @@ pipeline {
 			steps {
 
 
-				sh 	"docker build . -t $IMAGE --build-args=TMDB_V3_API_KEY=$API_KEY"
+				sh 	"docker build . -t $IMAGE --build-arg=TMDB_V3_API_KEY=$API_KEY"
 
 			}
 
