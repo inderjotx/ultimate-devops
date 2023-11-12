@@ -5,7 +5,6 @@ agent any
 tools {
 
 nodejs "node"
-sonar "sonar"
 
 }
 
