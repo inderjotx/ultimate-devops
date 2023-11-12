@@ -11,7 +11,7 @@ pipeline {
 	environment {
 		DOCKER-CRED = credentials('docker-credentials')
 			API_KEY = credentials('api-key')
-			TAG = sh(date +%s)
+			TAG = sh(script: 'date +%s', returnStdout: true).trim()
 			IMAGE = inderharrysingh/ultimate:$TAG
 
 	}
@@ -75,20 +75,20 @@ pipeline {
 		stage('Pushing Created Image'){
 
 			steps{
-				
- 	  			script {
-							
-						withCredentials([string(credentialsId: DOCKER_CRED , variable: 'DOCKER_HUB_PASSWORD')]) {
-                        			sh "echo $DOCKER_HUB_PASSWORD | docker login -u inderharrysingh --password-stdin"
-                   	
 
-					
-						docker push $IMAGE
-				 }
+				script {
+
+					withCredentials([string(credentialsId: DOCKER_CRED , variable: 'DOCKER_HUB_PASSWORD')]) {
+						sh "echo $DOCKER_HUB_PASSWORD | docker login -u inderharrysingh --password-stdin"
 
 
-}
-				
+
+							docker push $IMAGE
+					}
+
+
+				}
+
 			}
 
 		}
@@ -101,11 +101,11 @@ pipeline {
 
 
 
-post {
+	post {
 
-	always {
+		always {
 
-		docker rmi $IMAGE
+			docker rmi $IMAGE
 }
 
 }
