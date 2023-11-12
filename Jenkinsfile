@@ -5,7 +5,7 @@ agent any
 tools {
 
 nodejs "node"
-sonarqubeScanner "sonar"
+sonar "sonar"
 
 }
 
