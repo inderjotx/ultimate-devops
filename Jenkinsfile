@@ -79,7 +79,6 @@ pipeline {
 				script {
 
 					withCredentials([string(credentialsId: DOCKER_CRED , variable: 'DOCKER_HUB_PASSWORD')]) {
-					#h "echo $DOCKER_HUB_PASSWORD | docker login -u inderharrysingh --password-stdin"
 						sh "docker login -u inderharrysingh -p $DOCKER_HUB_PASSWORD"
 
 
