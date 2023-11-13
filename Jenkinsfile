@@ -34,14 +34,21 @@ pipeline {
 
 			steps{
 
-				sh '''
-					$SONAR_DIR/bin/sonar-scanner \
-					-Dsonar.projectKey=Netflix \
-					-Dsonar.sources=. \
-					-Dsonar.host.url=http://35.174.213.156:9000 \
-					-Dsonar.token=sqp_7fd21cae9749745f30c227e087b7a37c27b1afa9
+				script {
 
-					'''
+						withSonarQubeEnv('sonarqube-token'){
+									sh '''
+										$SONAR_DIR/bin/sonar-scanner \
+										-Dsonar.projectKey=Netflix \
+										-Dsonar.sources=. \
+										-Dsonar.host.url=http://35.174.213.156:9000 \
+							
+									'''
+
+						}
+
+						}
+
 			}
 
 		}
