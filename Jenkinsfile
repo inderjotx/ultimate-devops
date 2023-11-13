@@ -41,8 +41,7 @@ pipeline {
 										$SONAR_DIR/bin/sonar-scanner \
 										-Dsonar.projectKey=Netflix \
 										-Dsonar.sources=. \
-										-Dsonar.host.url=http://35.174.213.156:9000 \
-							
+										
 									'''
 
 						}
