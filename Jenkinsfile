@@ -5,7 +5,6 @@ pipeline {
 		tools {
 
 			nodejs "node"
-				sonar-scanner "sonar"
 
 		}
 
@@ -14,7 +13,8 @@ pipeline {
 			API_KEY = credentials('api-key')
 			TAG = sh(script: 'date +%s', returnStdout: true).trim()
 			IMAGE = "inderharrysingh/ultimate:$TAG"
-
+			SONAR_DIR = tool "sonar"
+		
 	}
 
 
@@ -35,7 +35,7 @@ pipeline {
 			steps{
 
 				sh '''
-					sonar-scanner \
+					$SONAR_DIR/bin/sonar-scanner \
 					-Dsonar.projectKey=Netflix \
 					-Dsonar.sources=. \
 					-Dsonar.host.url=http://35.174.213.156:9000 \
@@ -52,7 +52,7 @@ pipeline {
 
 			steps{
 
-				                waitForQualityGate abortPipeline: false
+				                waitForQualityGate abortPipeline: false , credentialsId: 'sonar'
 
 			}
 
