@@ -76,17 +76,12 @@ pipeline {
 
 			steps{
 
-				script {
 
-					withCredentials([string(credentialsId: DOCKER_CRED , variable: 'DOCKER_HUB_PASSWORD')]) {
-						sh "docker login -u inderharrysingh -p $DOCKER_HUB_PASSWORD"
+						sh "docker login -u inderharrysingh -p $DOCKER_CRED"
 
 
 							sh "docker push $IMAGE"
-					}
 
-
-				}
 
 			}
 
