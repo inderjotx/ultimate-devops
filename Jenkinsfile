@@ -9,7 +9,7 @@ pipeline {
 		}
 
 	environment {
-		DOCKER_CRED = credentials('docker-credentials')
+		DOCKER_CRED = credentials('docker')
 			API_KEY = credentials('api-key')
 			TAG = sh(script: 'date +%s', returnStdout: true).trim()
 			IMAGE = "inderharrysingh/ultimate:$TAG"
