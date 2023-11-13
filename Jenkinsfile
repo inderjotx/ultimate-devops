@@ -5,6 +5,7 @@ pipeline {
 		tools {
 
 			nodejs "node"
+				sonar-scanner "sonar"
 
 		}
 
@@ -33,10 +34,30 @@ pipeline {
 
 			steps{
 
-				sh 'echo "Mock testing..."'
+				sh '''
+					sonar-scanner \
+					-Dsonar.projectKey=Netflix \
+					-Dsonar.sources=. \
+					-Dsonar.host.url=http://35.174.213.156:9000 \
+					-Dsonar.token=sqp_7fd21cae9749745f30c227e087b7a37c27b1afa9
+
+					'''
 			}
 
 		}
+
+
+		stage('Waiting For The Scan to Conplete'){
+
+
+			steps{
+
+				                waitForQualityGate abortPipeline: false
+
+			}
+
+		}
+
 
 		stage('Testing Filesystem'){
 
@@ -77,10 +98,10 @@ pipeline {
 			steps{
 
 
-						sh "docker login -u inderharrysingh -p $DOCKER_CRED"
+				sh "docker login -u inderharrysingh -p $DOCKER_CRED"
 
 
-							sh "docker push $IMAGE"
+					sh "docker push $IMAGE"
 
 
 			}
