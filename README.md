@@ -1,5 +1,5 @@
 <div align="center">
-![image](https://github.com/inderharrysingh/ultimate-devops/assets/112561014/ec5c8bec-f092-43e9-95b3-db05c5df7ab6)
+![image](https://github.com/inderharrysingh/ultimate-devops/assets/112561014/efd13107-9402-40c8-93fe-1dd5468e6d12)
 
   <br>
   <a href="http://netflix-clone-with-tmdb-using-react-mui.vercel.app/">
