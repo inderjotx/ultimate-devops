@@ -125,7 +125,7 @@ pipeline {
 			steps{
 
 
-				sh "docker login -u inderharrysingh -p $DOCKER_CRED"
+				sh "echo $DOCKER_CRED | docker login -u inderharrysingh --password-stdin"
 
 
 					sh "docker push $IMAGE"
