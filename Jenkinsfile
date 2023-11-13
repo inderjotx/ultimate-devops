@@ -30,6 +30,26 @@ pipeline {
 
 		}
 
+		
+		stage('Dependency Checker'){
+			
+		
+			steps{
+
+					 dependencyCheck additionalArguments: ''' 
+							    -o './'
+							    -s './'
+							    -f 'ALL' 
+							    --prettyPrint''', odcInstallation: 'checker'
+						
+						dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+
+			}
+	
+
+	
+		}
+
 		stage('Testing'){
 
 			steps{
