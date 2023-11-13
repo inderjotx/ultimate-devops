@@ -36,7 +36,7 @@ pipeline {
 
 				script {
 
-						withSonarQubeEnv('sonarqube-token'){
+						withSonarQubeEnv('sonar'){
 									sh '''
 										$SONAR_DIR/bin/sonar-scanner \
 										-Dsonar.projectKey=Netflix \
